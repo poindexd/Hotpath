@@ -1,0 +1,3 @@
+div(ng-if='slide.image.resize_url' ng-class="{'image_left': slide.image_align=='Left', 'image_right':slide.image_align=='Right', 'image_top':slide.image_align=='Top'}")
+	image#image( src='{{slide.image.resize_url}}' height='100%' width='100%')
+	.overlay: i.material-icons.medium(ng-click='removeImage()') delete

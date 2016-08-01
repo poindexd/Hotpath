@@ -1,0 +1,83 @@
+html
+	head
+		title Hotpath
+		link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		//link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css')
+		link(rel='stylesheet', href='./css/materialize.css')
+		//link(rel='stylesheet', href='./css/main.css')
+		link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Raleway:400,300|PT+Sans', type="text/css")
+		style.
+			body {
+				display: flex;
+				min-height: 100vh;
+				flex-direction: column;
+			}
+
+			main {
+				flex: 1 0 auto;
+			}
+			.card .card-title{
+				font-size: inherit;
+			}
+			.card .card-content .card-title {
+				line-height: inherit;
+			}
+	body.grey.lighten-5(ng-app='dd', ng-controller='controller' ng-cloak)
+		include include/header.jade
+
+		main
+			.container
+				h5 Public Surveys
+				.row
+					.col.s12.l3(ng-repeat='survey in surveys')
+						.card.hoverable(ng-cloak)
+							a.card-image(href='/editor.html')
+								image(ng-src='{{survey.image}}')
+							.card-content
+								.card-title.activator {{survey.name}}
+									i.material-icons.right more_vert
+								label {{survey.organization}}
+							.card-reveal
+								.card-title {{survey.name}}
+									i.material-icons.right close
+								p blah
+
+		include include/footer.jade
+
+		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
+		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+		//script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
+		//script(src='./js/ng-sortable.min.js')
+		script(src='./js/surveys.js')
+		script.
+			$(document).ready(function(){
+				$('li').not('.tab, .no').velocity(
+						{ translateX: "-100px"},
+						{ duration: 0 });
+
+				$('ul').not('.tabs').each(function() {
+				var time = 0;
+					$(this).find('li').each(function(){
+
+						$(this).velocity(
+							{ opacity: "1", translateX: "0"},
+							{ duration: 800, delay: time, easing: [60, 10] });
+						time += 120;
+					});
+				});
+				$('ul.tabs').tabs();
+				$(".button-collapse").sideNav();
+
+				var time = 0;
+				$('.card').each(function(){
+
+						$(this).velocity(
+							{ opacity: "1", translateX: "0"},
+							{ duration: 800, delay: time, easing: [60, 10] });
+						time += 60;
+				})
+			});
+

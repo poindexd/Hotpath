@@ -1,0 +1,109 @@
+html
+	head
+		title Hotpath
+		link(rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons')
+		//link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css')
+		link(rel='stylesheet', href='./css/materialize.css')
+		//link(rel='stylesheet', href='./css/main.css')
+		link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Raleway:400,300|PT+Sans', type="text/css")
+
+		style.
+			.row{
+				margin-bottom: 0px;
+			}
+			#partners img {
+				-webkit-filter: grayscale(100%);
+				-moz-filter: grayscale(100%);
+				-o-filter: grayscale(100%);
+				-ms-filter: grayscale(100%);
+				filter: grayscale(100%); 
+				margin-right: 40px;
+			}
+			#partners img:hover{
+				-webkit-filter: grayscale(0%);
+				-moz-filter: grayscale(0%);
+				-o-filter: grayscale(0%);
+				-ms-filter: grayscale(0%);
+				filter: grayscale(0%);
+				transition-duration: 0.25s;
+			}
+			body {
+				display: flex;
+				min-height: 100vh;
+				flex-direction: column;
+				font-family: "Raleway", sans-serif;
+			}
+
+			main {
+				flex: 1 0 auto;
+			}
+			.card-panel{
+				opacity: 0;
+			}
+			nav ul a{
+					font-size: 1.2rem;
+			}
+	body.grey.lighten-5
+		include include/header.jade
+
+		main
+			.row.parallax-container(style='width:100%; background-image:url(); background-repeat: no-repeat; background-size: cover;background-position: 50% 20%')
+				.parallax
+					image(src='./img/parallax.jpg')
+				.col.l8.valign-wrapper(style='height:100%; padding: 40px')
+					h3.white-text.valign(style='font-weight: 300')
+						| Open Source Content and Tools for Collecting and Analyzing Patient Reported Outcomes
+				.col.l4(style='padding: 40px')
+					.card-panel
+						h4 Sign Up
+						.input-field
+							input(type='text' id='name')
+							label Name
+						.input-field
+							input(type='text' id='email')
+							label Email
+						.input-field
+							input(type='text' id='organization')
+							label Organization
+						a.btn.green Submit
+							i.material-icons.left send
+			#partners.row.grey(style='width:100%;padding: 10px 0px 20px 0px')
+				.container.center
+					a: img(src='./img/logo.png' height='60')
+					a: img(src='./img/ICHOM_Logo.png' height='40')
+			
+			.container.center
+				.row(style='padding: 40px 0px')
+					.col.l4: .card-panel
+							i.material-icons.orange-text.text-lighten-1.medium chrome_reader_mode
+							h5 Standardized Surveys
+							p We've curated expert created surveys to assess your patient population under best practice
+					.col.l4: .card-panel
+							i.material-icons.orange-text.text-lighten-1.medium build
+							h5 Editor Tools
+							p Use our survey creator tool to build your own surveys and collaborate with your research team
+					.col.l4: .card-panel
+							i.material-icons.orange-text.text-lighten-1.medium timeline
+							h5 Analyze Outcomes
+							p We host the surveys you create and deliver the results into a Google Spreadsheet for analysis
+
+		include include/footer.jade
+
+		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
+		script.
+			$(document).ready(function(){
+
+				$(".button-collapse").sideNav();
+				$('.parallax').parallax();
+				$(".button-collapse").sideNav();
+
+				var time = 0;
+				$('.card-panel').each(function(){
+
+						$(this).velocity(
+							{ opacity: "1", translateX: "0"},
+							{ duration: 800, delay: time, easing: [60, 10] });
+						time += 60;
+				})
+			});

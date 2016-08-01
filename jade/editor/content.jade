@@ -1,0 +1,7 @@
+#content(ng-class="{'image_left_content': slide.image_align=='Left', 'image_right_content':slide.image_align=='Right', 'image_top_content':slide.image_align=='Top'}")
+	.card-content.center
+		a.modal-trigger(href='#icon-selector')
+			i(ng-if='slide.icon').editable.material-icons.large.grey-text.text-lighten-2 {{slide.icon}}
+			i(ng-if='!slide.icon').editable.material-icons.medium.grey-text.text-lighten-2 add
+		.text.large.grey-text.text-darken-2.center(content-editable ng-model='slide.content' placeholder='Enter text')
+		.text(content-editable render-html='true' ng-model='slide.custom' placeholder='Custom HTML')

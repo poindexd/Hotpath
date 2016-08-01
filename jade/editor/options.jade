@@ -1,0 +1,27 @@
+.container-wide(ng-cloak)
+	.radioset(ng-class='{nobar: !isLikert()}'): ul
+
+		li(ng-repeat='option in slide.options')
+			.option-control
+				i.material-icons(ng-click='option.weight = option.weight - 1;') remove
+				span(ng-bind='option.weight')
+				i.material-icons(ng-click='option.weight = option.weight + 1;') add
+				input(id='correct-{{$index}}' type='checkbox' style='height:20px;width:20px;margin-top:3px' ng-model='option.correct')
+				//label(for='correct-{{$index}}') Correct?
+				i.material-icons(ng-click='slide.options.splice($index, 1)') close
+
+			.option-trigger
+				select.browser-default
+					option(disabled selected) Trigger
+					option(ng-repeat='trigger in slide.triggers') blah
+
+			input(type='radio' id='radio-{{$index}}' checked)
+			label(for='radio-{{$index}}' ng-class="{wrong: !isLikert() && !option.correct, correct: !isLikert() && option.correct}")
+
+		li(ng-if='!slide.options || slide.options.length < 5')
+			input(type='radio', name='add[]', id='add' checked)
+			label.add(for='add' ng-click='slide.options ? slide.options.push({}) : slide.options = [{}]')
+
+	.text-labels
+		.text-label(content-editable contenteditable='true' ng-repeat='option in slide.options' ng-model='option.text' placeholder='Text')
+		.text-label(ng-if='slide.options.length < 5') 

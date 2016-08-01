@@ -1,0 +1,69 @@
+html
+	head
+		title Hotpath
+		include include/head.jade
+		link(rel='stylesheet' href='./css/edit.css')
+		link(rel='stylesheet' href='./css/ng-sortable.min.css')
+			
+	body(ng-app='dd', ng-controller='controller' flow-init flow-prevent-drop)
+		include editor/icon-selector.jade
+		include editor/side-nav.jade
+
+		header.orange
+			include editor/nav.jade
+
+		main(ng-model='slide', ng-cloak): #card.wrapper
+			.container: .card
+
+				include editor/image-placeholders.jade
+
+				.row
+					include editor/image.jade
+					include editor/content.jade
+
+			include editor/options.jade
+
+		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js')
+		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+		script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
+		script(src='./js/ng-content-editable.js')
+		script(src='./js/ng-flow-standalone.min.js')
+		script(src='./js/ng-sortable.min.js')
+		script(src='./js/edit.js')
+		script.
+			$(document).ready(function(){
+				$('li').not('.tab, .no').velocity(
+						{ translateX: "-100px"},
+						{ duration: 0 });
+
+				$('ul').not('.tabs').each(function() {
+				var time = 0;
+					$(this).find('li').each(function(){
+
+						$(this).velocity(
+							{ opacity: "1", translateX: "0"},
+							{ duration: 800, delay: time, easing: [60, 10] });
+						time += 120;
+					});
+				});
+				$('ul.tabs').tabs();
+				$(".button-collapse").sideNav();
+				$('.modal-trigger').leanModal();
+				$('select').material_select();
+
+				var time = 0;
+				$('.card-panel').each(function(){
+
+						$(this).velocity(
+							{ opacity: "1", translateX: "0"},
+							{ duration: 800, delay: time, easing: [60, 10] });
+						time += 60;
+				})
+			});
+
+			$(document).on('change', 'select', function() {
+				$('select').material_select();
+			});

@@ -1,0 +1,11 @@
+#icon-selector.modal
+	.modal-content
+		.section
+			i.material-icons.medium(ng-repeat='icon in icons' ng-click='selectIcon(icon)') {{icon}}
+
+		.section
+			label(for='icon_manual') Advanced (Google Material Icons)
+			input(type='text' ng-model='slide.icon' id='icon_manual')
+	.modal-footer
+		a.btn-flat.modal-action.modal-close.waves-green Cancel
+		a.btn-flat.modal-action.modal-close.waves-green(ng-click='slide.icon=""') Remove

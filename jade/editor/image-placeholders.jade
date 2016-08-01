@@ -1,0 +1,27 @@
+div(flow-btn hidden)
+//.image-placeholder.editable(
+//style='top:0px; height: 60px; width:100%;' 
+//ng-click="imagePlaceholderClick($event);slide.image_align='Top'"
+//flow-drop 
+//flow-drag-enter="style1={border:'4px dashed green'};slide.image_align='Top'" 
+//flow-drag-leave="style1={};slide.image_align=''"
+//ng-style="style1"
+//)
+//	i.material-icons add_a_photo
+.image-placeholder(
+style='left:0px; height: 100%; width:60px;' 
+ng-click="imagePlaceholderClick($event);slide.image_align='Left'"
+flow-drop  
+flow-drag-enter="style2={border:'4px dashed green'};slide.image_align='Left'"
+flow-drag-leave="style2={}"
+ng-style="style2"
+)
+	i.material-icons add_a_photo
+.image-placeholder(
+style='right:0px; height: 100%; width:60px;' 
+ng-click="imagePlaceholderClick($event);slide.image_align='Right'"
+flow-drop 
+flow-drag-enter="style3={border:'4px dashed green'};slide.image_align='Right'" 
+flow-drag-leave="style3={}"
+ng-style="style3")
+	i.material-icons add_a_photo
