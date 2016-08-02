@@ -1,5 +1,5 @@
 ul#menu.side-nav.fixed.grey.lighten-4
-	li: a(href='/surveys.html').btn-flat Back
+	li: a(href='surveys.html').btn-flat Back
 		i.material-icons.left chevron_left
 	ul#slide-nav(as-sortable='dragControlListeners' ng-model='slides')
 		li(ng-repeat='slide in slides' as-sortable-item ng-class='{active: $index == $parent.index}')
