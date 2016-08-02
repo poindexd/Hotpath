@@ -1,4 +1,4 @@
-var dd = angular.module('dd', ['ngAnimate', 'ngSanitize']);
+var dd = angular.module('dd', []);
 
 dd.controller('controller', ['$scope', '$filter', '$timeout', '$sce',
  function($scope, $filter, $timeout, $sce) {

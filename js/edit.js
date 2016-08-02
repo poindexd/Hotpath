@@ -1,4 +1,4 @@
-var dd = angular.module('dd', ['ngAnimate', 'ngSanitize', 'as.sortable', 'flow', 'angular-content-editable']);
+var dd = angular.module('dd', ['as.sortable', 'flow', 'angular-content-editable']);
 
 dd.controller('controller', ['$scope', '$filter', '$timeout', '$sce',
  function($scope, $filter, $timeout, $sce) {

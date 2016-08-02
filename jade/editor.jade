@@ -2,8 +2,8 @@ html
 	head
 		title Hotpath
 		include include/head.jade
-		link(rel='stylesheet' href='./css/edit.css')
-		link(rel='stylesheet' href='./css/ng-sortable.min.css')
+		link(rel='stylesheet' href='css/edit.css')
+		link(rel='stylesheet' href='css/ng-sortable.min.css')
 			
 	body(ng-app='dd', ng-controller='controller' flow-init flow-prevent-drop)
 		include editor/icon-selector.jade
@@ -29,10 +29,10 @@ html
 		script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
 		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
 		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
-		script(src='./js/ng-content-editable.js')
-		script(src='./js/ng-flow-standalone.min.js')
-		script(src='./js/ng-sortable.min.js')
-		script(src='./js/edit.js')
+		script(src='js/ng-content-editable.js')
+		script(src='js/ng-flow-standalone.min.js')
+		script(src='js/ng-sortable.min.js')
+		script(src='js/edit.js')
 		script.
 			$(document).ready(function(){
 				$('li').not('.tab, .no').velocity(
