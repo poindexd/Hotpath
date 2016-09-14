@@ -74,8 +74,8 @@ div:focus, div:focus:hover {
 
 .option-control {
   position: absolute;
-  top: -135;
-  right: 30;
+  top: -100;
+  right: 50;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
@@ -154,13 +154,13 @@ div:focus, div:focus:hover {
   position: absolute;
   top: 0px;
   left: 0px;
-  height: 400px;
+  height: 300px;
   max-height: 600px;
   width: 30%; }
 
 .image_left_content {
   width: 70%;
-  height: 400px;
+  height: 300px;
   margin-left: 30%; }
   .image_left_content .card-content {
     top: 50%;
@@ -171,13 +171,13 @@ div:focus, div:focus:hover {
   position: absolute;
   top: 0px;
   right: 0px;
-  height: 400px;
+  height: 300px;
   max-height: 600px;
   width: 30%; }
 
 .image_right_content {
   width: 70%;
-  height: 400px;
+  height: 300px;
   margin-right: 30%; }
   .image_right_content .card-content {
     top: 50%;
@@ -209,3 +209,21 @@ div:focus, div:focus:hover {
 
 .radioset {
   padding: 120px 0px 60px 0px; }
+
+#preview .wrap {
+  width: 600px;
+  height: 450px;
+  padding: 0;
+  overflow: hidden; }
+
+#preview iframe {
+  width: 1200px;
+  height: 900px; }
+
+#preview iframe {
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.5);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 0; }

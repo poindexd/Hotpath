@@ -7,12 +7,21 @@ html
 			
 	body(ng-app='dd', ng-controller='controller' flow-init flow-prevent-drop)
 		include editor/icon-selector.jade
+		include editor/settings.jade
 		include editor/side-nav.jade
+		include editor/preview.jade
 
 		header.orange
 			include editor/nav.jade
 
-		main(ng-model='slide', ng-cloak): #card.wrapper
+
+		main(ng-if='!loaded'): .container.center
+			.progress: .indeterminate
+
+		main(ng-if='loaded && !slide' ng-cloak): .wrapper.center
+			h4 No slides... To create a new slide, Slide > New
+
+		main(ng-model='slide' ng-show='slide && loaded' ng-cloak): #card.wrapper
 			.container: .card
 
 				include editor/image-placeholders.jade
@@ -26,14 +35,17 @@ html
 		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 		script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js')
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
-		script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
-		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
-		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
+		script(src='https://www.gstatic.com/firebasejs/3.3.0/firebase.js')
+		script(src='https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js')
+		//script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
+		//script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
 		script(src='js/ng-content-editable.js')
 		script(src='js/ng-flow-standalone.min.js')
 		script(src='js/ng-sortable.min.js')
-		script(src='js/edit.js')
+		script(src='js/shared.js')
+		script(src='js/editor.js')
 		script.
+
 			$(document).ready(function(){
 				$('li').not('.tab, .no').velocity(
 						{ translateX: "-100px"},
@@ -53,6 +65,7 @@ html
 				$(".button-collapse").sideNav();
 				$('.modal-trigger').leanModal();
 				$('select').material_select();
+				$('.chips').material_chip();
 
 				var time = 0;
 				$('.card-panel').each(function(){

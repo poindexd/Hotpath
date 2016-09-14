@@ -1,0 +1,45 @@
+html
+	head
+		title Hotpath
+		include include/head.jade
+		//link(rel='stylesheet' href='css/edit.css')
+		//link(rel='stylesheet' href='css/ng-sortable.min.css')
+			
+	body
+
+		main: .container: .row: .col.s12.m8.offset-m2.l4.offset-l4
+			.center
+				img(src='img/hotpath_logo.svg' style='width:100%; max-width: 400px; padding: 10px')
+			.card-panel
+				
+				label(for='email') Email
+				input#email(type='email' name='email')
+				
+				label(for='password') Password
+				input#password(type='password' name='password')
+					
+				.input-field
+					a#submit.btn Submit
+						i.material-icons.left send
+
+		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
+		//script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js')
+		script(src='https://www.gstatic.com/firebasejs/3.3.0/firebase.js')
+		script(src='/js/shared.js')
+		script.
+
+			$('#submit').click(function(){
+				firebase.auth().signInWithEmailAndPassword($('#email').val(), $('#password').val())
+				.then(function(user){
+					window.location = decodeURIComponent(getParameterByName('redirect')) || '/';
+				})
+				.catch(function(error) {
+					console.log(error.code);
+					console.log(error.message);
+				});
+			});
+
+			function getParameterByName(name) {
+				var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+			}

@@ -1,39 +1,38 @@
-var dd = angular.module('dd', ['ngAnimate', 'ngSanitize']);
+var dd = angular.module('dd', ['ngAnimate', 'ngSanitize', 'firebase']);
 
-dd.controller('controller', ['$scope', '$filter', '$timeout', '$sce',
- function($scope, $filter, $timeout, $sce) {
-
- 	//Helper function that grabs data from Firebase and updates scope
-	$scope.grab = function(what, callback){
-		$scope.ref.child(what).on('value', function(snapshot) {
-			$scope[what] = [];
-			$scope.$apply(function () {
-				angular.forEach(snapshot.val(), function(value, key){
-					$scope[what].push(value);
-				});
-				console.log($scope[what]);
-				if (callback)
-					callback($scope[what]);
-			});
-		});
-	}
+dd.controller('controller', ['$scope', '$filter', '$timeout', '$sce', '$location', '$firebaseObject', '$firebaseArray',
+ function($scope, $filter, $timeout, $sce, $location, $firebaseObject, $firebaseArray) {
 
 	//Initialize slides and render slides[0]
 	$scope.init = function(){
-		$scope.grab('slides',function(slides){
-			//$scope.showSlide($scope.index = 0);
+		var surveyKey = $scope.surveyKey = $location.search()['survey'];
+		console.log(surveyKey);
+
+		var surveyRef = firebase.database().ref().child('surveys/' + surveyKey);
+		var slidesRef = firebase.database().ref().child('slides/').orderByChild('surveyKey').equalTo(surveyKey);
+
+		$scope.survey = $firebaseObject(surveyRef);
+		$scope.survey.$bindTo($scope, 'survey');
+
+		$scope.slides = $firebaseArray(slidesRef);
+		$scope.slides.$loaded()
+		.then(function(x){
+			$scope.showSlide(0);
+			$scope.loaded = true;
 		});
-		$scope.grab('surveys');
 	};
+	$scope.init();
 
 	//Render a slide, play audio, and set duration if applicable
 	$scope.showSlide = function(index){
 		
+		$scope.index = index;
+
 		if (index >= $scope.slides.length)
 			return;
 
 		$scope.slide = $scope.slides[index];
-		$scope.progress = (($scope.index+1) / $scope.slides.length) * 100 + '%';
+		$scope.progress = (($scope.index / ($scope.slides.length -1)) * 100) + '%';
 
 		if ($scope.slide.audio){
 			$scope.busy = true;
@@ -79,22 +78,4 @@ dd.controller('controller', ['$scope', '$filter', '$timeout', '$sce',
 		return $sce.trustAsHtml(snippet)
 	}
 
-	$scope.ref = new Firebase('https://webhook.firebaseio.com/buckets/sb/e9a4ff1d-eb5e-4fbd-8950-ceceab335e94/dev/data');
-	$scope.init();
-
 }]);
-
-function unique(value, index, self) { 
-	if (value) return self.indexOf(value) === index;
-}
-
-function combine(pre, cur) {
-	return pre.concat(cur);
-}
-
-function p(name){
-	return (function(name, obj){
-		if (obj)
-			return obj[name];
-	}).bind(null, name);
-}

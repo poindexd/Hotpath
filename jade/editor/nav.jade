@@ -1,21 +1,19 @@
 nav.orange: .nav-wrapper(style='padding: 0px 20px')
 
 	ul.right
-		li.no: a Settings
+		li.no: a.modal-trigger(href='#settings') Settings
 			i.material-icons.left settings
 
 	a.button-collapse(href="#", data-activates='menu'): i.material-icons menu
 	
 	ul.left
-		li.text(style='margin-left: 20px').no Hotpath Demo Survey
+		li.no.text(style='margin-left: 20px') {{survey.name}}
 
 nav.orange.lighten-2.hide-on-med-and-down(style='clear:both'): .nav-wrapper(style='padding: 0px 20px')
 
 	ul.right
-		li.no: a Duration
-			i.material-icons.left access_time
-		li.no: a Audio
-			i.material-icons.left music_note
+		li.no: a(ng-click='preview()') Preview
+			i.material-icons.left play_arrow
 
 	ul.left
 		li: a.dropdown-button(href='#!' data-activates='menu-slide') Slide
@@ -23,9 +21,9 @@ nav.orange.lighten-2.hide-on-med-and-down(style='clear:both'): .nav-wrapper(styl
 
 	ul#menu-slide.dropdown-content
 
-		li.no: a(ng-click='slides.splice(index + 1, 0, {})') New
+		li.no: a(ng-click='newSlide()') New
 			//i.material-icons.left add
 		//li.no: a(ng-click='slides.splice(index + 1, 0, JSON.parse(JSON.stringify(slide)))') Duplicate
 			i.material-icons.left content_copy
-		li.no: a(ng-click='slides.splice(index, 1)') Delete
+		li.no: a(ng-click='deleteSlide()') Delete
 			//i.material-icons.left delete

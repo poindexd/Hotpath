@@ -1,0 +1,27 @@
+html
+	head
+		title Digital Discharge
+		include include/head.jade
+
+	body
+		header
+			include include/progress.jade
+
+		main: .wrapper
+			.container
+				h1.center Welcome to&nbsp;
+					img(src='./img/logo_light.svg' height='120' style='vertical-align:bottom')
+					| &nbsp;Rewards!
+				.divider
+				h2 We're here to help you stay on track with your health and reward you for doing so!
+				h3 You are about to take a survey about your health. When you leave the hospital, you will continue to receive reminders to help you stay healthy.
+				a.btn-large.green.right Next
+
+		footer
+			include viewer/footer.jade
+
+		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+		script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
+		script(src='./js/app.js')

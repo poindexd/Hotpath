@@ -1,0 +1,41 @@
+mixin prize(title, amount, url)
+	.col.s4
+		.card-panel.center.hoverable
+			h5.yellow-text.text-darken-1
+				img(src='./img/coin_small.png')
+				= amount
+			img(src=url, height='100', width='auto')
+			h6= title
+
+html
+	head
+		title Digital Discharge
+		include include/head.jade
+
+	body
+		header
+			include include/progress.jade
+
+		main: .wrapper
+			.container
+				h2.center Choose your prize
+				.divider
+				h4 The prize you select below will be awarded to you upon successful completion of your care plan. You will earn points towards your prize by responding to easy-to-follow messages.
+				.divider
+				br
+				h5.center Please select your prize:
+				
+
+				.row
+					+prize('One hour massage', 800, './img/logo_optimum_health.png')
+					+prize('$100 gift card', 1600, '/img/logo_whole_foods.png')
+					+prize('Nike athletic shoes', 1400, './img/logo_nike.png')
+
+		footer
+			include viewer/footer.jade
+
+		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+		script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
+		script(src='./js/app.js')

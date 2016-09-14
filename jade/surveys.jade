@@ -22,35 +22,43 @@ html
 			.card .card-content .card-title {
 				line-height: inherit;
 			}
-	body.grey.lighten-5(ng-app='dd', ng-controller='controller' ng-cloak)
+	body.grey.lighten-5(ng-app='surveys', ng-controller='controller' ng-cloak)
 		include include/header.jade
 
-		main
+		main(style='padding-top: 40px')
 			.container
 				h5 Public Surveys
+			.container(ng-if='!loaded')
+				.progress: .indeterminate
+			.container(ng-if='loaded')
 				.row
-					.col.s12.l3(ng-repeat='survey in surveys')
+					.col.s12.l3(ng-repeat='survey in surveys' ng-cloak)
 						.card.hoverable(ng-cloak)
-							a.card-image(href='editor.html')
-								image(ng-src='{{survey.image}}')
+							.card-image
+								image(ng-src='{{survey.image}}' ng-cloak)
 							.card-content
-								.card-title.activator {{survey.name}}
-									i.material-icons.right more_vert
-								label {{survey.organization}}
-							.card-reveal
+								a.card-title(href='editor.html#?survey={{survey.$id}}' ng-cloak) {{survey.name}}
+									//i.material-icons.right more_vert
+								label(ng-cloak) {{survey.organization}}
+							//.card-reveal
 								.card-title {{survey.name}}
 									i.material-icons.right close
 								p blah
+				a.btn(ng-click='newSurvey()') New
+					i.material-icons.left add
 
 		include include/footer.jade
 
 		script(src='https://code.jquery.com/jquery-2.2.4.min.js')
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js")
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+		script(src='https://www.gstatic.com/firebasejs/3.3.0/firebase.js')
+		script(src='https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js')
 		//script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
 		//script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
 		//script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
 		//script(src='./js/ng-sortable.min.js')
+		script(src='js/shared.js')
 		script(src='js/surveys.js')
 		script.
 			$(document).ready(function(){

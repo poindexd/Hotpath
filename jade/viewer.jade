@@ -4,7 +4,7 @@ html
 		include include/head.jade
 
 	body(ng-app='dd', ng-controller='controller')
-		//header
+		header
 			include include/progress.jade
 
 		main(ng-model='slide', ng-cloak): .wrapper
@@ -13,11 +13,11 @@ html
 
 					//IMAGE TOP
 					.col.s12.l12.center(ng-if='slide.image_align=="Top"')
-						.card-image: image(src='{{slide.image.resize_url}}')
+						.card-image: image(src='{{slide.image_url}}')
 
 					//IMAGE LEFT
 					.col.s12.l4.center(ng-if='slide.image_align=="Left"')
-						.card-image: image(src='{{slide.image.resize_url}}', style='max-height:600px')
+						.card-image: image(src='{{slide.image_url}}', style='max-height:600px')
 
 					//CONTENT
 					.col.s12.center(ng-class="{l8: slide.image_align=='Left' || slide.image_align=='Right', l12: slide.image_align!='Left' && slide.image_align!='Right'}")
@@ -28,21 +28,23 @@ html
 
 					//IMAGE RIGHT
 					.col.s12.l4.center(ng-if='slide.image_align=="Right"')
-						.card-image: image(src='{{slide.image.resize_url}}', style='max-height:600px')
+						.card-image: image(src='{{slide.image_url}}', style='max-height:600px')
 
 			//Likert/MULTIPLE CHOICE
-			.container-wide(ng-if='slide.options', style='padding-top:40px', ng-cloak)
+			.container-wide(ng-if='slide.options', ng-cloak)
 				.radioset(ng-class='{nobar: !isLikert()}'): ul
 					li(ng-repeat='option in slide.options')
 						input(type='radio', name='radio[]', id='radio-{{$index}}')
 						label(for='radio-{{$index}}', ng-class="{wrong: !isLikert() && !option.correct, correct: !isLikert() && option.correct}")
 				.text-labels: .text-label(ng-repeat='option in slide.options') {{option.text}}
 
-		//footer(ng-click='advanceSlide()')
-			include include/footer.jade
+		footer(ng-click='advanceSlide()')
+			include viewer/footer.jade
 
 		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
-		script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
+		script(src='https://www.gstatic.com/firebasejs/3.3.0/firebase.js')
+		script(src='https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js')
 		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
 		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
-		script(src='./js/app.js')
+		script(src='js/shared.js')
+		script(src='js/viewer.js')

@@ -1,0 +1,38 @@
+html
+	head
+		title Digital Discharge
+		include include/head.jade
+
+	body
+		header
+			include include/progress.jade
+
+		main: .wrapper
+			.container
+				h2.center Stay on track
+				.divider
+				br
+
+			.container: .row
+				.col.s6.l3
+					img.responsive-img(src='./img/sms_preview_1.jpg')
+				.col.s6.l3
+					h5 Text Message Check-Ins
+					p Receive easy to follow prompts to help you maintain your health away from the hospital.
+				.col.s6.l3
+					img.responsive-img(src='./img/sms_preview_2.jpg')
+				.col.s6.l3
+					h5 Responsive Status Prompts
+					p Easily track your Patient Prize points and redeem them for prizes, all through your phone!
+			.container
+				a.btn-large.green.right Next
+		
+
+		footer
+			include viewer/footer.jade
+
+		script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js')
+		script(src='https://cdn.firebase.com/js/client/2.4.2/firebase.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js')
+		script(src='./js/app.js')

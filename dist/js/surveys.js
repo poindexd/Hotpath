@@ -1,35 +1,22 @@
-var dd = angular.module('dd', []);
+var surveys = angular.module('surveys', ['firebase']);
 
-dd.controller('controller', ['$scope', '$filter', '$timeout', '$sce',
- function($scope, $filter, $timeout, $sce) {
+surveys.controller('controller', ['$scope', '$filter', '$timeout', '$sce', '$firebaseArray',
+ function($scope, $filter, $timeout, $sce, $firebaseArray) {
 
- 	$scope.surveys = [
- 		{
- 			name: 'Hotpath Demo Survey',
- 			organization: 'Wellopp',
- 			image: 'http://www.ichom.org/wp-content/uploads/2015/03/bp_level_of_pain_01_455x620-420x315.jpg'
- 		},
- 		{
- 			name: 'Pregnancy and Childbirth',
- 			organization: 'IHCOM',
- 			image: 'http://www.ichom.org/wp-content/uploads/2015/03/pcb-420x315.jpg'
- 		}
- 	];
+ 	$scope.init = function(){
+ 		var surveysRef = firebase.database().ref().child('surveys/');
+ 		$scope.surveys = $firebaseArray(surveysRef);
+ 		$scope.surveys.$loaded()
+ 		.then(function(x){
+ 			$scope.loaded = true;
+ 		})
+ 	}
+
+ 	$scope.init();
+
+ 	$scope.newSurvey = function() {
+ 		var key = firebase.database().ref().child('surveys').push().key;
+ 		window.location = 'editor.html#?survey=' + key;
+ 	}
 
 }]);
-
-
-function unique(value, index, self) { 
-	if (value) return self.indexOf(value) === index;
-}
-
-function combine(pre, cur) {
-	return pre.concat(cur);
-}
-
-function p(name){
-	return (function(name, obj){
-		if (obj)
-			return obj[name];
-	}).bind(null, name);
-}

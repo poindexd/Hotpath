@@ -1,0 +1,15 @@
+<html><head><title>Hotpath</title><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/><!--link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css')--><link rel="stylesheet" href="css/materialize.css"/><link rel="stylesheet" href="css/main.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,300|PT+Sans" type="text/css"/><meta name="viewport" content="width=device-width, initial-scale=1"/><!--link(rel='stylesheet' href='css/edit.css')--><!--link(rel='stylesheet' href='css/ng-sortable.min.css')--></head><body><main><div class="container"><div class="row"><div class="col s12 m8 offset-m2 l4 offset-l4"><div class="center"><img src="img/hotpath_logo.svg" style="width:100%; max-width: 400px; padding: 10px"/></div><div class="card-panel"><label for="email">Email</label><input id="email" type="email" name="email"/><label for="password">Password</label><input id="password" type="password" name="password"/><div class="input-field"><a id="submit" class="btn">Submit<i class="material-icons left">send</i></a></div></div></div></div></div></main><script src="https://code.jquery.com/jquery-2.2.4.min.js"></script><!--script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js')--><script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script><script src="/js/shared.js"></script><script>$('#submit').click(function(){
+	firebase.auth().signInWithEmailAndPassword($('#email').val(), $('#password').val())
+	.then(function(user){
+		window.location = decodeURIComponent(getParameterByName('redirect')) || '/';
+	})
+	.catch(function(error) {
+		console.log(error.code);
+		console.log(error.message);
+	});
+});
+
+function getParameterByName(name) {
+	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+	return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}</script></body></html>
