@@ -189,3 +189,6 @@ p {
 
 .animate-leave.animate-leave-active {
   left: -100%; }
+
+.toast {
+  background: #4caf50; }
