@@ -12,7 +12,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 		// User is signed in.
 	} else {
 		if (!window.location.pathname.includes('login'))
-			window.location = encodeURI('login.html?redirect=' + encodeURIComponent(window.location.href));
+			window.location = encodeURI('./login.html?redirect=' + encodeURIComponent(window.location.href));
 	}
 });
 
